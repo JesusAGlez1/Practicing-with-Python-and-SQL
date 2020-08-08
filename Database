@@ -1,0 +1,38 @@
+import sqlite3
+#**** Connection with Employee.py ****
+from employeepython import Employee
+
+conn = sqlite3.connect('employee.db')
+
+c = conn.cursor()
+
+c.execute("DROP TABLE IF EXISTS employees")
+c.execute("""CREATE TABLE employees(
+            id_emp char(4) NOT NULL PRIMARY KEY,
+            first text,
+            last text,
+            pay integer
+            )""")
+
+# **** connection with Employee.py. Another way to add new values ****
+emp_1 = Employee('3900','María', 'Gonzalez', 30000)
+emp_2 = Employee('5321', 'John', 'Smith', 10000)
+
+print("The email for Maria Gonzalez is: \n", emp_1.email)
+print("The employee with id number", emp_2.id_emp +" gain $", emp_2.pay, " each month")
+
+
+############
+c.execute("INSERT INTO employees VALUES ('1849','Jesus', 'Gonzalez', 12000)")
+c.execute("INSERT INTO employees VALUES('2505','Karla', 'Gonzalez', '18000')")
+c.execute("INSERT INTO employees VALUES('3002','María', 'Vazquez', '13500')")
+c.execute("INSERT INTO employees VALUES('4745','Heiler', 'Osuna', '13500')")
+c.execute("SELECT * FROM employees ")
+#c.execute("SELECT * FROM employees WHERE last = 'Gonzalez'")
+#c.execute("SELECT * FROM employees WHERE id_emp = '2505'")
+print(c.fetchmany(8))
+#print(c.fetchone())
+
+conn.commit()
+
+conn.close()
