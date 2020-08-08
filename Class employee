@@ -1,0 +1,26 @@
+
+"""
+Created on Sat Aug  8 13:58:16 2020
+
+@author: Strappy
+"""
+
+class Employee:
+    """A sample Employee class"""
+
+    def __init__(self, id_emp, first, last, pay):
+        self.id_emp = id_emp
+        self.first = first
+        self.last = last
+        self.pay = pay
+
+    @property
+    def email(self):
+        return '{}.{}@jager.com'.format(self.first, self.last)
+
+    @property
+    def fullname(self):
+        return '{} {}'.format(self.first, self.last)
+
+    def __repr__(self):
+        return "Employee('{}', '{}', '{}', {})".format(self.id_emp, self.first, self.last, self.pay)
